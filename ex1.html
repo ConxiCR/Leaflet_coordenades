@@ -21,14 +21,21 @@
     <script>
         //fase1 - creació mapa interactiu amb centre Plaça Catalunya
         //fase2 - marcador a la ubicació carrer Balmes, 16
+        //fase3 - Al fer click al marcador ens mostrarà el missatge de la adreça"
         var map = L.map('mapid').setView([41.386843, 2.170158], 16);
-        var marker = L.marker([41.386930, 2.165960]).addTo(map)
-        .bindPopup('carrer <b>Balmes, 16</b>')
+        var marker = L.marker([41.386930, 2.165960])
+            .bindPopup('carrer </br> <b>Balmes, 16</b>')
+            .addTo(map)
             .openPopup();
-
+        
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',   
             maxZoom: 18,
+
         }).addTo(map);
+
+
+
     </script>
 </body>
 </html>
