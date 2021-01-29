@@ -11,6 +11,7 @@
        #mapid{
             width: 100%;
             height: 400px;
+            margin: 20px;
             box-shadow: 5px 5px 5px #888;
         }
     </style>
@@ -19,22 +20,20 @@
     <div id="mapid"></div>
 
     <script>
-        //fase1 - creació mapa interactiu amb centre Plaça Catalunya
-        //fase2 - marcador a la ubicació carrer Balmes, 16
-        //fase3 - Al fer click al marcador ens mostrarà el missatge de la adreça"
+        //fase 1 - Al fer click en qualsevol punt del mapa, ens haurà de mostrar latitud i longitud I un zoom màxim al marcador
         var map = L.map('mapid').setView([41.386843, 2.170158], 16);
-        var marker = L.marker([41.386930, 2.165960])
-            .bindPopup('<h3>carrer<h3><b>Balmes, 16</b>')
-            .addTo(map);
-                
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',   
-            maxZoom: 18,
-
-        }).addTo(map);
-
-
+        var marker = null;
+           
+        map.on('click', function(e){
+            if(marker) map.removelayer(marker)
+            var center = e.latlng;
+            
+            //// initialize the map on the "map" div with a given center and zoom
+            marker = L.marker(center).bindPopup("Les coordenades són:<br><b>Latitud: "+e.latlng+" longitud: "+e.latlng.lng+"</b>").addTo(map);
+            map.setView(center,18);
+        })
 
     </script>
+
 </body>
 </html>
