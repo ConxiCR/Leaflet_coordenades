@@ -11,36 +11,44 @@
     <style>
        #mapid{
             
-            height: 300px;
+            height: 500px;
             margin: 20px;
             box-shadow: 5px 5px 5px #888;
         }
     </style>
 </head>
 <body>
-    <div id="mapid"></div>
+    <div id="mapid"></div>   
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
    
     <script>
-		var map     = L.map('mapid').setView([41.400, 2.206], 13);
-		var tiles   = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        var map = L.map('mapid').setView([41.400, 2.206], 14); 
+        var tiles   = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap<\/a> contributors'
                     }).addTo(map);
-		var marker = null;
-
-		map.on('click', function(e) {
-					
-			if(marker) map.removeLayer(marker)
-			var center = e.latlng;
-
-			// initialize the map on the "map" div with a given center and zoom
-			marker = L.marker(center).bindPopup("Les coordenadas són:<br><br><b>Latitud: "+e.latlng.lat+"<br> Longitud: "+e.latlng.lng+"</b>").addTo(map);
-			map.setView(center, 18);
+        var LeafIcon = L.Icon.extend({
+            options: {
+                shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+                iconSize:     [38, 95],
+                shadowSize:   [50, 64],
+                iconAnchor:   [22, 94],
+                shadowAnchor: [4, 62],
+                popupAnchor:  [-3, -76]
+            }
 	    });
-	
-	</script>
-    
+        var greenIcon = new LeafIcon({iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png'}),
+		redIcon = new LeafIcon({iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-red.png'}),
+		orangeIcon = new LeafIcon({iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-orange.png'});
+
+        L.marker([41.386930, 2.165960], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
+        L.marker([41.397130, 2.165960], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
+        L.marker([41.406930, 2.165960], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
+
+
+    </script>
+     
 </body>
+
 </html>
