@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordenades</title>
+    <!--Leaflet library and CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" crossorigin=""></script>
+   
+    <style>
+       #mapid{
+            
+            height: 300px;
+            margin: 20px;
+            box-shadow: 5px 5px 5px #888;
+        }
+    </style>
+</head>
+<body>
+    <div id="mapid"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+   
+    <script>
+		var map     = L.map('mapid').setView([41.400, 2.206], 13);
+		var tiles   = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap<\/a> contributors'
+                    }).addTo(map);
+		var marker = null;
+
+		map.on('click', function(e) {
+					
+			if(marker) map.removeLayer(marker)
+			var center = e.latlng;
+
+			// initialize the map on the "map" div with a given center and zoom
+			marker = L.marker(center).bindPopup("Les coordenadas són:<br><br><b>Latitud: "+e.latlng.lat+"<br> Longitud: "+e.latlng.lng+"</b>").addTo(map);
+			map.setView(center, 18);
+	    });
+	
+	</script>
+    
+</body>
+</html>
